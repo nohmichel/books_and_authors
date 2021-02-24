@@ -1,0 +1,45 @@
+#wrapper {
+	margin: auto;
+	padding: 25px 100px 0px 200px;
+	font-family: Geneva, Verdana, "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+.text_box {
+	vertical-align: top;
+}
+#t_input{
+	float: right;
+	width: 319px;
+	height: 24px;
+}
+#book_list {
+	margin-left: 500px;
+	font-size: 20px;
+}
+.book_and_list{
+	display: inline-block;
+	vertical-align: top;
+}
+#button {
+	float: right;
+}
+
+td, th {
+	padding: 0.5rem;
+	text-align: left;
+
+}
+
+#books{
+	border-collapse: collapse;
+}
+
+th {
+	background-color: darkgrey;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+}
+
+#books td {
+	border: 1px solid black;
+}
+

@@ -1,0 +1,126 @@
+>>> Book.objects.create(title="c sharp", desc="A programming language developed by Microsoft")
+<Book: Book object (1)>
+>>> Book.objects.create(title="Java", desc="A class-based, object oriented language")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Python", desc="An interpreted, high-level and general-purpose programming language")
+<Book: Book object (3)>
+>>> Book.objects.create(title="PHP", desc="A general-purpose scripting lanague in web development.")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Ruby", desc="An interpreted, high-level, general-purpose programming language.")
+>>> Author.objects.create(first_name="Jane", last_name="Austen")
+<Author: Author object (1)>
+>>> Author.objects.create(first_name="Emily", last_name="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+<Author: Author object (3)>
+>>> Author.objects.create(first_name="William", last_name="Shakespeare")
+<Author: Author object (4)>
+>>> Author.objects.create(first_name="Lau", last_name="Tzu")
+<Author: Author object (5)>
+>>> exit()
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> " "
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py makemigrations
+No changes detected
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying books_authors_app.0003_author_notes... OK
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py shell
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:43:08) [MSC v.1926 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_authors_app.models import *
+>>> c = Book.objects.get(id=1)
+>>> c.title = "C#"
+>>> c.save()
+>>> c = Book.objects.get(id=4)
+>>> c = Author.objects.get(id=4)
+>>> c.first_name = "Bill"
+>>> c.save()
+>>> jane_austen = Author.objects.get(id=1)
+>>> first_book = Book.objects.get(id=1)
+>>> second_book = Book.objects.get(id=2)
+>>> exit()
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py makemigrations
+Migrations for 'books_authors_app':
+  books_authors_app\migrations\0004_author_books.py
+    - Add field books to author
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying books_authors_app.0004_author_books... OK
+(djangoPy3env) PS C:\Users\Nohmi\Desktop\documents\codingdojo\python_stack\django\django_intro\book_authors_proj> python manage.py shell
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:43:08) [MSC v.1926 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_authors_app.models import *
+>>> jane_austen.books.add(first_book)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'jane_austen' is not defined
+>>> jane_austen = Author.objects.get(id=1)
+>>> first_book = Book.objects.get(id=1)
+>>> second_book = Book.objects.get(id=2)
+>>> jane_austen.books.add(first_book)
+>>> jane_austen.books.add(second_book)
+>>> emily_d = Author.objects.get(id=2)
+>>> book_one = Book.objects.get(id=1)
+>>> book_two = Book.objects.get(id=2)
+>>> book_three = Book.objects.get(id=3)
+>>> emily_d.books.add(book_one)
+>>> emily_d.books.add(book_two)
+>>> emily_d.books.add(book_three)
+>>> Fyodor = Author.objects.get(id=3)
+>>> book_four = Book.objects.get(id=4)
+>>> Fyodor.books.add(book_one)
+>>> Fyodor.books.add(book_two)
+>>> Fyodor.books.add(book_three)
+>>> Fyodor.books.add(book_four)
+>>> william = Author.objects.get(id=4)
+>>> book_five = Book.objects.get(id=5)
+>>> william.books.add(book_one)
+>>> william.books.add(book_two)
+>>> william.books.add(book_three)
+>>> william.books.add(book_four)
+>>> william.books.add(book_five)
+>>> book_three.authors.all()
+<QuerySet [<Author object: Emily Dickinson (2)>, <Author object: Fyodor Dostoevsky (3)>, <Author object: Bill Shakespeare (4)>]>
+>>> book_three.authors.remove(emily_d)
+>>> tzu = Authors.objects.get(id=5)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Authors' is not defined
+>>> tzu = Author.objects.get(id=5)
+>>> tzu.authors.add(book_two)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Author' object has no attribute 'authors'
+>>> tzu.authors.add(book_two)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Author' object has no attribute 'authors'
+>>> tzu.books.add(book_two)
+>>> Fyodor.books.all()
+<QuerySet [<Book object: C# (1)>, <Book object: Java (2)>, <Book object: Python (3)>, <Book object: PHP (4)>]>
+>>> fith_book.authors.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'fith_book' is not defined
+>>> fifth_book.authors.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'fifth_book' is not defined
+>>> book_five.authors.all()
+<QuerySet [<Author object: Bill Shakespeare (4)>]>
+>>>

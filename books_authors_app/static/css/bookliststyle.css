@@ -1,0 +1,49 @@
+#wrapper {
+	margin: auto;
+	padding: 25px 100px 0px 200px;
+	font-family: Geneva, Verdana, "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+.text_box {
+	vertical-align: top;
+	margin-left: 30px;
+/*	float: right;*/
+}
+#name_field{
+	float: right;
+	width: 319px;
+	height: 24px;
+}
+#author_list {
+	margin-left: 500px;
+	font-size: 20px;
+}
+.author_and_list{
+	display: inline-block;
+	vertical-align: top;
+}
+#button {
+	float: right;
+}
+
+td, th {
+	padding: 0.5rem;
+	text-align: left;
+
+}
+
+#authors{
+	border-collapse: collapse;
+}
+
+th {
+	background-color: darkgrey;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+}
+
+#authors td {
+	border: 1px solid black;
+}
+label{
+	margin-right: 10px;
+}
